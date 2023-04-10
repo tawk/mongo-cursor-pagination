@@ -1,12 +1,6 @@
-# mongo-cursor-pagination
+# @tawk.to/mongo-cursor-pagination
 
-[![Build Status](https://travis-ci.org/mixmaxhq/mongo-cursor-pagination.svg?branch=master)](https://travis-ci.org/mixmaxhq/mongo-cursor-pagination)
-
-This module aids in implementing "cursor-based" pagination using Mongo range queries or relevancy-based search results. **This module is currently used in production for the [Mixmax API](https://developer.mixmax.com) to return millions of results a day**.
-
-### New
-
-- [Now Supports Mongoose](https://github.com/mixmaxhq/mongo-cursor-pagination#with-mongoose)
+This module aids in implementing "cursor-based" pagination using Mongo range queries or relevancy-based search results.
 
 ## Background
 
@@ -28,7 +22,7 @@ Here are some examples of cursor-based APIs:
 
 ## Install
 
-`npm install mongo-cursor-pagination --save`
+`npm install @tawk.to/mongo-cursor-pagination --save`
 
 ## Usage
 
@@ -389,12 +383,6 @@ db.people.createIndex({
 
 To run tests, you first must [start a Mongo server on port 27017](https://mongodb.github.io/node-mongodb-native/2.2/quick-start/) and then run `npm test`.
 
-## Future ideas
+## TODOs
 
-- Add support to `search()` to query previous pages.
-
-## Publishing a new version
-
-```
-GH_TOKEN=xxx npx semantic-release --no-ci
-```
+- Convert to typescript and add proper typing
