@@ -1,17 +1,15 @@
-const paging = require('../');
 const dbUtils = require('./support/db');
-
-const driver = process.env.DRIVER;
+const paging = require('../');
 
 describe('search', () => {
   let mongod;
   const t = {};
   beforeAll(async () => {
-    mongod = dbUtils.start();
-    t.db = await dbUtils.db(mongod, driver);
+    mongod = await dbUtils.start();
+    t.db = await dbUtils.db(mongod);
 
     await Promise.all([
-      t.db.collection('test_paging_search').ensureIndex(
+      t.db.collection('test_paging_search').createIndex(
         {
           mytext: 'text',
         },
@@ -19,7 +17,7 @@ describe('search', () => {
           name: 'test_index',
         }
       ),
-      t.db.collection('test_duplicate_search').ensureIndex(
+      t.db.collection('test_duplicate_search').createIndex(
         {
           mytext: 'text',
         },
@@ -30,7 +28,7 @@ describe('search', () => {
     ]);
 
     await Promise.all([
-      t.db.collection('test_paging_search').insert([
+      t.db.collection('test_paging_search').insertMany([
         {
           mytext: 'one',
         },
@@ -60,7 +58,7 @@ describe('search', () => {
           group: 'one',
         },
       ]),
-      t.db.collection('test_duplicate_search').insert([
+      t.db.collection('test_duplicate_search').insertMany([
         {
           _id: 6,
           mytext: 'one',

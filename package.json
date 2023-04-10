@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "prepublishOnly": "npm run babelBuild && if [ \"$CI\" = '' ]; then node -p 'JSON.parse(process.env.npm_package_config_manualPublishMessage)'; exit 1; fi",
     "semantic-release": "SEMANTIC_COMMITLINT_SKIP=f4543f643bac890c627d538e6200c5f5a1d45ebc semantic-release",
-    "test": "npm run babelBuild; DRIVER=mongoist jest --forceExit && DRIVER=native jest --forceExit"
+    "test": "npm run babelBuild; jest --forceExit"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
   "homepage": "https://github.com/mixmaxhq/mongo-cursor-pagination#readme",
   "dependencies": {
     "base64-url": "^2.2.0",
-    "bson": "^4.7.0",
+    "bson": "^5.2.0",
     "object-path": "^0.11.5",
     "projection-utils": "^1.1.0",
     "semver": "^5.4.1",
@@ -58,11 +58,8 @@
     "eslint": "^6.8.0",
     "eslint-config-mixmax": "^4.11.2",
     "jest": "^26.0.1",
-    "mockgoose": "^8.0.4",
-    "mongodb": "^2.2.11",
-    "mongodb-memory-server": "6.9.6",
-    "mongoist": "^2.5.5",
-    "mongoose": "5.11.10",
+    "mongodb": "^5.2.0",
+    "mongodb-memory-server": "8.12.2",
     "prettier": "^1.19.1",
     "semantic-release": "^17.2.3"
   },

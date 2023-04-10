@@ -1,20 +1,19 @@
-const paging = require('../');
-const dbUtils = require('./support/db');
 const _ = require('underscore');
 
-const driver = process.env.DRIVER;
+const dbUtils = require('./support/db');
+const paging = require('../');
 
 let mongod;
 
 describe('aggregate', () => {
   const t = {};
   beforeAll(async () => {
-    mongod = dbUtils.start();
-    t.db = await dbUtils.db(mongod, driver);
+    mongod = await dbUtils.start();
+    t.db = await dbUtils.db(mongod);
 
     // Set up collections once for testing later.
     await Promise.all([
-      t.db.collection('test_paging').insert([
+      t.db.collection('test_paging').insertMany([
         {
           counter: 1,
         },
@@ -45,7 +44,7 @@ describe('aggregate', () => {
           color: 'blue',
         },
       ]),
-      t.db.collection('test_aggregation').insert([
+      t.db.collection('test_aggregation').insertMany([
         {
           items: [1, 2, 3],
         },
@@ -59,7 +58,7 @@ describe('aggregate', () => {
           items: [2, 4, 5],
         },
       ]),
-      t.db.collection('test_aggregation_lookup').insert([
+      t.db.collection('test_aggregation_lookup').insertMany([
         {
           _id: 1,
           name: 'mercury',
@@ -85,7 +84,7 @@ describe('aggregate', () => {
           name: 'saturn',
         },
       ]),
-      t.db.collection('test_aggregation_lookup').ensureIndex(
+      t.db.collection('test_aggregation_lookup').createIndex(
         {
           name: 'text',
         },
@@ -93,7 +92,7 @@ describe('aggregate', () => {
           name: 'test_index',
         }
       ),
-      t.db.collection('test_aggregation_sort').insert([
+      t.db.collection('test_aggregation_sort').insertMany([
         {
           name: 'Alpha',
         },
@@ -115,7 +114,7 @@ describe('aggregate', () => {
       ]),
       t.db
         .collection('test_null_values')
-        .insert(
+        .insertMany(
           [
             undefined,
             undefined,

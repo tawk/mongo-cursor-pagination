@@ -1,12 +1,13 @@
+const { ObjectId } = require('mongodb');
+
 const bsonUrlEncoding = require('../../src/utils/bsonUrlEncoding');
 const dbUtils = require('../support/db');
-const mongo = require('mongoist');
 
 describe('bson url encoding', () => {
   let mongod;
   const t = {};
   beforeAll(async () => {
-    mongod = dbUtils.start();
+    mongod = await dbUtils.start();
     t.db = await dbUtils.db(mongod);
   });
 
@@ -14,12 +15,12 @@ describe('bson url encoding', () => {
 
   it('encodes and decodes complex objects', async () => {
     const obj = {
-      _id: mongo.ObjectID('58164d86f69ab45942c6ff38'),
+      _id: new ObjectId('58164d86f69ab45942c6ff38'),
       date: new Date('Sun Oct 30 2016 12:32:35 GMT-0700 (PDT)'),
       number: 1,
       string: 'complex String &$##$-/?',
     };
-    await t.db.collection('test_objects').insert(obj);
+    await t.db.collection('test_objects').insertOne(obj);
     const bsonObject = await t.db.collection('test_objects').findOne({});
     const str = bsonUrlEncoding.encode(bsonObject);
 
