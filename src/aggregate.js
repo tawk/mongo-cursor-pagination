@@ -1,7 +1,8 @@
 const _ = require('underscore');
-const sanitizeParams = require('./utils/sanitizeParams');
-const { prepareResponse, generateSort, generateCursorQuery } = require('./utils/query');
+
 const config = require('./config');
+const { prepareResponse, generateSort, generateCursorQuery } = require('./utils/query');
+const sanitizeParams = require('./utils/sanitizeParams');
 
 /**
  * Performs an aggregate() query on a passed-in Mongo collection, using criteria you specify.
@@ -28,7 +29,7 @@ const config = require('./config');
  *        2. Immutable. If the value changes between paged queries, it could appear twice.
  *        3. Accessible. The field must be present in the aggregation's end result so the
  *          aggregation steps added at the end of the pipeline to implement the paging can access it.
-          4. Consistent. All values (except undefined and null values) must be of the same type.
+ *        4. Consistent. All values (except undefined and null values) must be of the same type.
  *      The default is to use the Mongo built-in '_id' field, which satisfies the above criteria.
  *      The only reason to NOT use the Mongo _id field is if you chose to implement your own ids.
  *    -sortAscending {boolean} Whether to sort in ascending order by the `paginatedField`.
@@ -75,11 +76,7 @@ module.exports = async function aggregate(collection, params) {
   const collation = params.collation || config.COLLATION;
   if (collation && !isCollationNull) options.collation = collation;
 
-  // Support both the native 'mongodb' driver and 'mongoist'. See:
-  // https://www.npmjs.com/package/mongoist#cursor-operations
-  const aggregateMethod = collection.aggregateAsCursor ? 'aggregateAsCursor' : 'aggregate';
-
-  const results = await collection[aggregateMethod](aggregation, options).toArray();
+  const results = await collection.aggregate(aggregation, options).toArray();
 
   return prepareResponse(results, params);
 };

@@ -1,4 +1,5 @@
 const _ = require('underscore');
+
 const config = require('./config');
 const bsonUrlEncoding = require('./utils/bsonUrlEncoding');
 
@@ -89,11 +90,7 @@ module.exports = async function(collection, searchString, params) {
 
   let response;
 
-  // Support both the native 'mongodb' driver and 'mongoist'. See:
-  // https://www.npmjs.com/package/mongoist#cursor-operations
-  const aggregateMethod = collection.aggregateAsCursor ? 'aggregateAsCursor' : 'aggregate';
-
-  const results = await collection[aggregateMethod](aggregate).toArray();
+  const results = await collection.aggregate(aggregate).toArray();
 
   const fullPageOfResults = results.length === params.limit;
   if (fullPageOfResults) {
