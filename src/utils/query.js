@@ -7,13 +7,12 @@ const bsonUrlEncoding = require('./bsonUrlEncoding');
  *
  * NOTE: this function modifies the passed-in `response` argument directly.
  *
- * @param      {Object}  params
- *   @param      {String}  paginatedField
- *   @param      {boolean} sortCaseInsensitive
- *
- * @param      {Object}  response  The response
- *   @param      {String?}  previous
- *   @param      {String?}  next
+ * @param {Object} params Parameters
+ * @param {String} params.paginatedField
+ * @param {boolean} params.sortCaseInsensitive
+ * @param {Object} response The response
+ * @param {String?} response.previous
+ * @param {String?} response.next
  *
  * @returns void
  */
@@ -67,10 +66,10 @@ module.exports = {
 
     const response = {
       results,
-      previous: results[0],
+      previous : results[0],
       hasPrevious,
-      next: results[results.length - 1],
-      hasNext,
+      next : results[results.length - 1],
+      hasNext
     };
 
     encodePaginationTokens(params, response);
@@ -92,15 +91,15 @@ module.exports = {
       (!params.sortAscending && params.previous) || (params.sortAscending && !params.previous);
     const sortDir = sortAsc ? 1 : -1;
 
-    if (params.paginatedField == '_id') {
+    if (params.paginatedField === '_id') {
       return {
-        _id: sortDir,
+        _id : sortDir
       };
     } else {
       const field = params.sortCaseInsensitive ? '__lc' : params.paginatedField;
       return {
-        [field]: sortDir,
-        _id: sortDir,
+        [field] : sortDir,
+        _id : sortDir
       };
     }
   },
@@ -121,86 +120,86 @@ module.exports = {
     // a `next` cursor will have precedence over a `previous` cursor.
     const op = params.next || params.previous;
 
-    if (params.paginatedField == '_id') {
+    if (params.paginatedField === '_id') {
       if (sortAsc) {
-        return { _id: { $gt: op } };
+        return { _id : { $gt : op } };
       } else {
-        return { _id: { $lt: op } };
+        return { _id : { $lt : op } };
       }
     } else {
       const field = params.sortCaseInsensitive ? '__lc' : params.paginatedField;
 
-      const notUndefined = { [field]: { $exists: true } };
-      const onlyUndefs = { [field]: { $exists: false } };
-      const notNullNorUndefined = { [field]: { $ne: null } };
-      const nullOrUndefined = { [field]: null };
-      const onlyNulls = { $and: [{ [field]: { $exists: true } }, { [field]: null }] };
+      const notUndefined = { [field] : { $exists : true } };
+      const onlyUndefs = { [field] : { $exists : false } };
+      const notNullNorUndefined = { [field] : { $ne : null } };
+      const nullOrUndefined = { [field] : null };
+      const onlyNulls = { $and : [{ [field] : { $exists : true } }, { [field] : null }] };
 
       const [paginatedFieldValue, idValue] = op;
       switch (paginatedFieldValue) {
         case null:
           if (sortAsc) {
             return {
-              $or: [
+              $or : [
                 notNullNorUndefined,
                 {
                   ...onlyNulls,
-                  _id: { $gt: idValue },
-                },
-              ],
+                  _id : { $gt : idValue }
+                }
+              ]
             };
           } else {
             return {
-              $or: [
+              $or : [
                 onlyUndefs,
                 {
                   ...onlyNulls,
-                  _id: { $lt: idValue },
-                },
-              ],
+                  _id : { $lt : idValue }
+                }
+              ]
             };
           }
         case undefined:
           if (sortAsc) {
             return {
-              $or: [
+              $or : [
                 notUndefined,
                 {
                   ...onlyUndefs,
-                  _id: { $gt: idValue },
-                },
-              ],
+                  _id : { $gt : idValue }
+                }
+              ]
             };
           } else {
             return {
               ...onlyUndefs,
-              _id: { $lt: idValue },
+              _id : { $lt : idValue }
             };
           }
         default:
           if (sortAsc) {
             return {
-              $or: [
-                { [field]: { $gt: paginatedFieldValue } },
+              $or : [
+                { [field] : { $gt : paginatedFieldValue } },
                 {
-                  [field]: { $eq: paginatedFieldValue },
-                  _id: { $gt: idValue },
-                },
-              ],
+                  [field] : { $eq : paginatedFieldValue },
+                  _id : { $gt : idValue }
+                }
+              ]
             };
           } else {
             return {
-              $or: [
-                { [field]: { $lt: paginatedFieldValue } },
+              $or : [
+                { [field] : { $lt : paginatedFieldValue } },
                 nullOrUndefined,
                 {
-                  [field]: { $eq: paginatedFieldValue },
-                  _id: { $lt: idValue },
-                },
-              ],
+                  [field] : { $eq : paginatedFieldValue },
+                  _id : { $lt : idValue }
+                }
+              ]
             };
           }
       }
     }
-  },
+  }
 };

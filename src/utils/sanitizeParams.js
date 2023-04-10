@@ -9,8 +9,8 @@ module.exports = async function sanitizeParams(collection, params) {
   if (params.next) params.next = bsonUrlEncoding.decode(params.next);
 
   params = _.defaults(params, {
-    limit: config.DEFAULT_LIMIT,
-    paginatedField: '_id',
+    limit : config.DEFAULT_LIMIT,
+    paginatedField : '_id'
   });
 
   if (params.limit < 1) params.limit = 1;
@@ -32,8 +32,11 @@ module.exports = async function sanitizeParams(collection, params) {
       // Since the primary sort field is not provided by the 'after' pagination cursor we
       // have to look it up when the paginated field is not _id.
       const doc = await collection.findOne(
-        { _id: params.after },
-        { [params.paginatedField]: true, _id: false }
+        { _id : params.after },
+        {
+          [params.paginatedField] : true,
+          _id : false
+        }
       );
       if (doc) {
         // Handle usage of dot notation in paginatedField
@@ -57,8 +60,11 @@ module.exports = async function sanitizeParams(collection, params) {
       // Since the primary sort field is not provided by the 'before' pagination cursor we
       // have to look it up when the paginated field is not _id.
       const doc = await collection.findOne(
-        { _id: params.before },
-        { [params.paginatedField]: true, _id: false }
+        { _id : params.before },
+        {
+          [params.paginatedField] : true,
+          _id : false
+        }
       );
       if (doc) {
         // Handle usage of dot notation in paginatedField
@@ -75,7 +81,7 @@ module.exports = async function sanitizeParams(collection, params) {
   if (params.fields) {
     params.fields = _.extend(
       {
-        _id: 0, // Mongo includes this field by default, so don't request it unless the user wants it.
+        _id : 0 // Mongo includes this field by default, so don't request it unless the user wants it.
       },
       params.fields
     );

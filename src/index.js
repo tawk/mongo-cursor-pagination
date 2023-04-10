@@ -11,5 +11,5 @@ module.exports = {
   aggregate,
   search,
   sanitizeQuery,
-  encodePaginationTokens,
+  encodePaginationTokens
 };
