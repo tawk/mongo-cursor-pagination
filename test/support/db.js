@@ -3,7 +3,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 
 async function start() {
   const server = new MongoMemoryServer({
-    binary: { version: '4.4.18' },
+    binary : { version : '4.4.18' }
   });
 
   await server.start();
@@ -19,5 +19,5 @@ async function db(mongod) {
 
 module.exports = {
   db,
-  start,
+  start
 };

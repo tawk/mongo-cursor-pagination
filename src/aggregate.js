@@ -1,7 +1,11 @@
 const _ = require('underscore');
 
 const config = require('./config');
-const { prepareResponse, generateSort, generateCursorQuery } = require('./utils/query');
+const {
+  prepareResponse,
+  generateSort,
+  generateCursorQuery
+} = require('./utils/query');
 const sanitizeParams = require('./utils/sanitizeParams');
 
 /**
@@ -43,7 +47,7 @@ const sanitizeParams = require('./utils/sanitizeParams');
  *    -collation {Object} An optional collation to provide to the mongo query. E.g. { locale: 'en', strength: 2 }. When null, disables the global collation.
  */
 module.exports = async function aggregate(collection, params) {
-  params = _.defaults(await sanitizeParams(collection, params), { aggregation: [] });
+  params = _.defaults(await sanitizeParams(collection, params), { aggregation : [] });
 
   const $match = generateCursorQuery(params);
   const $sort = generateSort(params);
@@ -52,11 +56,11 @@ module.exports = async function aggregate(collection, params) {
   let aggregation;
   if (params.sortCaseInsensitive) {
     aggregation = params.aggregation.concat([
-      { $addFields: { __lc: { $toLower: '$' + params.paginatedField } } },
+      { $addFields : { __lc : { $toLower : '$' + params.paginatedField } } },
       { $match },
       { $sort },
       { $limit },
-      { $project: { __lc: 0 } },
+      { $project : { __lc : 0 } }
     ]);
   } else {
     aggregation = params.aggregation.concat([{ $match }, { $sort }, { $limit }]);

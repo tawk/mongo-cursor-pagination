@@ -53,15 +53,15 @@ function resolveFields(desiredFields, allowedFields, overrideFields) {
   }
 
   // If no desired fields are specified, we treat that as wanting the default set of fields.
-  const desiredFieldset = _.isEmpty(desiredFields)
-    ? new ProjectionFieldSet([[]])
-    : ProjectionFieldSet.fromDotted(desiredFields);
+  const desiredFieldset = _.isEmpty(desiredFields) ?
+    new ProjectionFieldSet([[]]) :
+    ProjectionFieldSet.fromDotted(desiredFields);
 
   // If allowedFields isn't provided, we treat that as not having restrictions. However, if it's an
   // empty array, we treat that as have no valid fields.
-  const allowedFieldset = allowedFields
-    ? fieldsFromMongo(allowedFields)
-    : new ProjectionFieldSet([[]]);
+  const allowedFieldset = allowedFields ?
+    fieldsFromMongo(allowedFields) :
+    new ProjectionFieldSet([[]]);
 
   // Don't trust fields passed in the querystring, so whitelist them against the
   // fields defined in parameters. Add override fields from parameters.

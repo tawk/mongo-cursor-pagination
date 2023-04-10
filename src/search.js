@@ -22,13 +22,13 @@ const bsonUrlEncoding = require('./utils/bsonUrlEncoding');
  *    -next {String} The value to start querying the page. Defaults to start at the beginning of
  *      the results.
  */
-module.exports = async function(collection, searchString, params) {
+module.exports = async function (collection, searchString, params) {
   if (_.isString(params.limit)) params.limit = parseInt(params.limit, 10);
   if (params.next) params.next = bsonUrlEncoding.decode(params.next);
 
   params = _.defaults(params, {
-    query: {},
-    limit: config.MAX_LIMIT,
+    query : {},
+    limit : config.MAX_LIMIT
   });
 
   if (params.limit < 1) params.limit = 1;
@@ -38,54 +38,54 @@ module.exports = async function(collection, searchString, params) {
 
   const aggregate = [
     {
-      $match: _.extend({}, params.query, {
-        $text: {
-          $search: searchString,
-        },
-      }),
+      $match : _.extend({}, params.query, {
+        $text : {
+          $search : searchString
+        }
+      })
     },
     {
-      $project: _.extend({}, params.fields, {
-        _id: 1,
-        score: {
-          $meta: 'textScore',
-        },
-      }),
+      $project : _.extend({}, params.fields, {
+        _id : 1,
+        score : {
+          $meta : 'textScore'
+        }
+      })
     },
     {
-      $sort: {
-        score: {
-          $meta: 'textScore',
+      $sort : {
+        score : {
+          $meta : 'textScore'
         },
-        _id: -1,
-      },
-    },
+        _id : -1
+      }
+    }
   ];
 
   if (params.next) {
     aggregate.push({
-      $match: {
-        $or: [
+      $match : {
+        $or : [
           {
-            score: {
-              $lt: params.next[0],
-            },
+            score : {
+              $lt : params.next[0]
+            }
           },
           {
-            score: {
-              $eq: params.next[0],
+            score : {
+              $eq : params.next[0]
             },
-            _id: {
-              $lt: params.next[1],
-            },
-          },
-        ],
-      },
+            _id : {
+              $lt : params.next[1]
+            }
+          }
+        ]
+      }
     });
   }
 
   aggregate.push({
-    $limit: params.limit,
+    $limit : params.limit
   });
 
   let response;
@@ -96,11 +96,11 @@ module.exports = async function(collection, searchString, params) {
   if (fullPageOfResults) {
     response = {
       results,
-      next: bsonUrlEncoding.encode([_.last(results).score, _.last(results)._id]),
+      next : bsonUrlEncoding.encode([_.last(results).score, _.last(results)._id])
     };
   } else {
     response = {
-      results,
+      results
     };
   }
   return response;

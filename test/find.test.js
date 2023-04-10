@@ -16,168 +16,168 @@ describe('find', () => {
     await Promise.all([
       t.db.collection('test_paging').insertMany([
         {
-          counter: 1,
+          counter : 1
         },
         {
-          counter: 2,
+          counter : 2
         },
         {
-          counter: 3,
+          counter : 3
         },
         {
-          counter: 4,
-          color: 'blue',
+          counter : 4,
+          color : 'blue'
         },
         {
-          counter: 5,
-          color: 'blue',
+          counter : 5,
+          color : 'blue'
         },
         {
-          counter: 6,
-          color: 'blue',
+          counter : 6,
+          color : 'blue'
         },
         {
-          counter: 7,
-          color: 'blue',
+          counter : 7,
+          color : 'blue'
         },
         {
-          counter: 8,
-          color: 'blue',
-        },
+          counter : 8,
+          color : 'blue'
+        }
       ]),
       t.db.collection('test_duplicate_custom_fields').insertMany([
         {
-          _id: 6,
-          counter: 6,
-          timestamp: 1477347800603,
+          _id : 6,
+          counter : 6,
+          timestamp : 1477347800603
         },
         {
-          _id: 5,
-          counter: 5,
-          timestamp: 1477347800603,
+          _id : 5,
+          counter : 5,
+          timestamp : 1477347800603
         },
         {
-          _id: 4,
-          counter: 4,
-          timestamp: 1477347800603,
+          _id : 4,
+          counter : 4,
+          timestamp : 1477347800603
         },
         {
-          _id: 3,
-          counter: 3,
-          timestamp: 1477347772077,
+          _id : 3,
+          counter : 3,
+          timestamp : 1477347772077
         },
         {
-          _id: 2,
-          counter: 2,
-          timestamp: 1477347772077,
+          _id : 2,
+          counter : 2,
+          timestamp : 1477347772077
         },
         {
-          _id: 1,
-          counter: 1,
-          timestamp: 1477347772077,
-        },
+          _id : 1,
+          counter : 1,
+          timestamp : 1477347772077
+        }
       ]),
       t.db.collection('test_paging_custom_fields').insertMany([
         {
-          counter: 6,
-          timestamp: 1477347800603,
+          counter : 6,
+          timestamp : 1477347800603
         },
         {
-          counter: 5,
-          timestamp: 1477347792380,
+          counter : 5,
+          timestamp : 1477347792380
         },
         {
-          counter: 4,
-          timestamp: 1477347784766,
+          counter : 4,
+          timestamp : 1477347784766
         },
         {
-          counter: 3,
-          timestamp: 1477347772077,
+          counter : 3,
+          timestamp : 1477347772077
         },
         {
-          counter: 2,
-          timestamp: 1477347763813,
+          counter : 2,
+          timestamp : 1477347763813
         },
         {
-          counter: 1,
-          timestamp: 1477347755654,
-        },
+          counter : 1,
+          timestamp : 1477347755654
+        }
       ]),
       t.db.collection('test_paging_date').insertMany([
         {
-          counter: 2,
-          date: new Date(1477347763813),
+          counter : 2,
+          date : new Date(1477347763813)
         },
         {
-          counter: 3,
-          date: new Date(1477347772077),
+          counter : 3,
+          date : new Date(1477347772077)
         },
         {
-          counter: 4,
-          date: new Date(1477347784766),
+          counter : 4,
+          date : new Date(1477347784766)
         },
         {
-          counter: 1,
-          date: new Date(1477347755654),
-        },
+          counter : 1,
+          date : new Date(1477347755654)
+        }
       ]),
       t.db.collection('test_paging_date_in_object').insertMany([
         {
-          counter: 2,
-          start: { date: new Date(1477347763813) },
+          counter : 2,
+          start : { date : new Date(1477347763813) }
         },
         {
-          counter: 3,
-          start: { date: new Date(1477347772077) },
+          counter : 3,
+          start : { date : new Date(1477347772077) }
         },
         {
-          counter: 4,
-          start: { date: new Date(1477347784766) },
+          counter : 4,
+          start : { date : new Date(1477347784766) }
         },
         {
-          counter: 1,
-          start: { date: new Date(1477347755654) },
-        },
+          counter : 1,
+          start : { date : new Date(1477347755654) }
+        }
       ]),
       t.db.collection('test_paging_limits').insertMany([
         {
-          counter: 6,
+          counter : 6
         },
         {
-          counter: 5,
+          counter : 5
         },
         {
-          counter: 4,
+          counter : 4
         },
         {
-          counter: 3,
+          counter : 3
         },
         {
-          counter: 2,
+          counter : 2
         },
         {
-          counter: 1,
-        },
+          counter : 1
+        }
       ]),
       t.db.collection('test_sorting').insertMany([
         {
-          name: 'Alpha',
+          name : 'Alpha'
         },
         {
-          name: 'gimel',
+          name : 'gimel'
         },
         {
-          name: 'Beta',
+          name : 'Beta'
         },
         {
-          name: 'bet',
+          name : 'bet'
         },
         {
-          name: 'Gamma',
+          name : 'Gamma'
         },
         {
-          name: 'aleph',
-        },
+          name : 'aleph'
+        }
       ]),
       t.db.collection('test_null_values').insertMany(
         [
@@ -189,10 +189,15 @@ describe('find', () => {
           'Alice',
           'Bob',
           'alpha',
-          'bravo',
-        ].map((name, i) => (name === undefined ? { _id: i + 1 } : { _id: i + 1, name }))
+          'bravo'
+        ].map((name, i) => (name === undefined ?
+            { _id : i + 1 } :
+            {
+              _id : i + 1,
+              name
+            }))
         // Ids start with 1 because Mongoist driver doesn't support _id as 0
-      ),
+      )
     ]);
   });
 
@@ -208,7 +213,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
+          limit : 3
         });
 
         expect(res.results.length).toEqual(3);
@@ -220,8 +225,8 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -233,8 +238,8 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(2);
@@ -245,8 +250,8 @@ describe('find', () => {
 
         // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
+          limit : 3,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(3);
@@ -258,8 +263,8 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
+          limit : 3,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(3);
@@ -274,7 +279,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
+          limit : 3
         });
 
         expect(res.results.length).toEqual(3);
@@ -286,8 +291,8 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -299,8 +304,8 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(2);
@@ -311,8 +316,8 @@ describe('find', () => {
 
         // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
+          limit : 3,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -324,8 +329,8 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
+          limit : 3,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -340,7 +345,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -353,8 +358,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -366,8 +371,8 @@ describe('find', () => {
 
         // Go forward another 1, results be empty.
         res = await paging.find(collection, {
-          limit: 2,
-          next: res.next,
+          limit : 2,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(1);
@@ -380,7 +385,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -393,8 +398,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -406,8 +411,8 @@ describe('find', () => {
 
         // Go forward another 1, results be empty.
         res = await paging.find(collection, {
-          limit: 2,
-          after: res.results[res.results.length - 1]._id,
+          limit : 2,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(1);
@@ -420,7 +425,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -433,8 +438,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -446,8 +451,8 @@ describe('find', () => {
 
         // Go back to beginning.
         res = await paging.find(collection, {
-          limit: 100,
-          previous: res.previous,
+          limit : 100,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(4);
@@ -463,7 +468,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -476,8 +481,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -489,8 +494,8 @@ describe('find', () => {
 
         // Go back to beginning.
         res = await paging.find(collection, {
-          limit: 100,
-          before: res.results[0]._id,
+          limit : 100,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(4);
@@ -506,9 +511,9 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
-          },
+          query : {
+            color : 'blue'
+          }
         });
 
         expect(res.results.length).toEqual(5);
@@ -519,13 +524,13 @@ describe('find', () => {
 
       it('uses the hint parameter', async () => {
         const collection = t.db.collection('test_paging');
-        await t.db.collection('test_paging').createIndex({ color: 1 }, { name: 'color_1' });
+        await t.db.collection('test_paging').createIndex({ color : 1 }, { name : 'color_1' });
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
+          query : {
+            color : 'blue'
           },
-          hint: 'color_1',
+          hint : 'color_1'
         });
 
         expect(res.results.length).toEqual(5);
@@ -538,12 +543,12 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
+          query : {
+            color : 'blue'
           },
-          fields: {
-            _id: 1,
-          },
+          fields : {
+            _id : 1
+          }
         });
 
         expect(res.results.length).toEqual(5);
@@ -554,10 +559,10 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page.
         const res = await paging.find(collection, {
-          limit: 3,
-          query: {
-            nonexistantfield: true,
-          },
+          limit : 3,
+          query : {
+            nonexistantfield : true
+          }
         });
 
         expect(res.results.length).toEqual(0);
@@ -569,8 +574,8 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
-          sortAscending: true,
+          limit : 3,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -582,9 +587,9 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
-          sortAscending: true,
+          limit : 3,
+          next : res.next,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -596,9 +601,9 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
-          sortAscending: true,
+          limit : 3,
+          next : res.next,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(2);
@@ -609,9 +614,9 @@ describe('find', () => {
 
         // // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
-          sortAscending: true,
+          limit : 3,
+          previous : res.previous,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -623,9 +628,9 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
-          sortAscending: true,
+          limit : 3,
+          previous : res.previous,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -640,8 +645,8 @@ describe('find', () => {
         const collection = t.db.collection('test_paging');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
-          sortAscending: true,
+          limit : 3,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -653,9 +658,9 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
-          sortAscending: true,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -667,9 +672,9 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
-          sortAscending: true,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(2);
@@ -680,9 +685,9 @@ describe('find', () => {
 
         // // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
-          sortAscending: true,
+          limit : 3,
+          before : res.results[0]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -694,9 +699,9 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
-          sortAscending: true,
+          limit : 3,
+          before : res.results[0]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -712,42 +717,42 @@ describe('find', () => {
       beforeEach(async () => {
         await t.db.collection('test_paging_string_ids').insertMany([
           {
-            _id: new ObjectId().toString(),
-            counter: 1,
+            _id : new ObjectId().toString(),
+            counter : 1
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 2,
+            _id : new ObjectId().toString(),
+            counter : 2
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 3,
+            _id : new ObjectId().toString(),
+            counter : 3
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 4,
-            color: 'blue',
+            _id : new ObjectId().toString(),
+            counter : 4,
+            color : 'blue'
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 5,
-            color: 'blue',
+            _id : new ObjectId().toString(),
+            counter : 5,
+            color : 'blue'
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 6,
-            color: 'blue',
+            _id : new ObjectId().toString(),
+            counter : 6,
+            color : 'blue'
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 7,
-            color: 'blue',
+            _id : new ObjectId().toString(),
+            counter : 7,
+            color : 'blue'
           },
           {
-            _id: new ObjectId().toString(),
-            counter: 8,
-            color: 'blue',
-          },
+            _id : new ObjectId().toString(),
+            counter : 8,
+            color : 'blue'
+          }
         ]);
       });
 
@@ -759,7 +764,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
+          limit : 3
         });
 
         expect(res.results.length).toEqual(3);
@@ -771,8 +776,8 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -784,8 +789,8 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(2);
@@ -796,8 +801,8 @@ describe('find', () => {
 
         // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
+          limit : 3,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(3);
@@ -809,8 +814,8 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
+          limit : 3,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(3);
@@ -825,7 +830,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
+          limit : 3
         });
 
         expect(res.results.length).toEqual(3);
@@ -837,8 +842,8 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -850,8 +855,8 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(2);
@@ -862,8 +867,8 @@ describe('find', () => {
 
         // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
+          limit : 3,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -875,8 +880,8 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
+          limit : 3,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -891,7 +896,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -904,8 +909,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -917,8 +922,8 @@ describe('find', () => {
 
         // Go forward another 1, results be empty.
         res = await paging.find(collection, {
-          limit: 2,
-          next: res.next,
+          limit : 2,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(1);
@@ -931,7 +936,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -944,8 +949,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -957,8 +962,8 @@ describe('find', () => {
 
         // Go forward another 1, results be empty.
         res = await paging.find(collection, {
-          limit: 2,
-          after: res.results[res.results.length - 1]._id,
+          limit : 2,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(1);
@@ -971,7 +976,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -984,8 +989,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
+          limit : 3,
+          next : res.next
         });
 
         expect(res.results.length).toEqual(3);
@@ -997,8 +1002,8 @@ describe('find', () => {
 
         // Go back to beginning.
         res = await paging.find(collection, {
-          limit: 100,
-          previous: res.previous,
+          limit : 100,
+          previous : res.previous
         });
 
         expect(res.results.length).toEqual(4);
@@ -1014,7 +1019,7 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 2
         let res = await paging.find(collection, {
-          limit: 4,
+          limit : 4
         });
 
         expect(res.results.length).toEqual(4);
@@ -1027,8 +1032,8 @@ describe('find', () => {
 
         // Go forward 2
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id
         });
 
         expect(res.results.length).toEqual(3);
@@ -1040,8 +1045,8 @@ describe('find', () => {
 
         // Go back to beginning.
         res = await paging.find(collection, {
-          limit: 100,
-          before: res.results[0]._id,
+          limit : 100,
+          before : res.results[0]._id
         });
 
         expect(res.results.length).toEqual(4);
@@ -1057,9 +1062,9 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
-          },
+          query : {
+            color : 'blue'
+          }
         });
 
         expect(res.results.length).toEqual(5);
@@ -1072,13 +1077,13 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         await t.db
           .collection('test_paging_string_ids')
-          .createIndex({ color: 1 }, { name: 'color_1' });
+          .createIndex({ color : 1 }, { name : 'color_1' });
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
+          query : {
+            color : 'blue'
           },
-          hint: 'color_1',
+          hint : 'color_1'
         });
 
         expect(res.results.length).toEqual(5);
@@ -1091,12 +1096,12 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page.
         const res = await paging.find(collection, {
-          query: {
-            color: 'blue',
+          query : {
+            color : 'blue'
           },
-          fields: {
-            _id: 1,
-          },
+          fields : {
+            _id : 1
+          }
         });
 
         expect(res.results.length).toEqual(5);
@@ -1108,10 +1113,10 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page.
         const res = await paging.find(collection, {
-          limit: 3,
-          query: {
-            nonexistantfield: true,
-          },
+          limit : 3,
+          query : {
+            nonexistantfield : true
+          }
         });
 
         expect(res.results.length).toEqual(0);
@@ -1123,8 +1128,8 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
-          sortAscending: true,
+          limit : 3,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1136,9 +1141,9 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
-          sortAscending: true,
+          limit : 3,
+          next : res.next,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1150,9 +1155,9 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          next: res.next,
-          sortAscending: true,
+          limit : 3,
+          next : res.next,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(2);
@@ -1163,9 +1168,9 @@ describe('find', () => {
 
         // // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
-          sortAscending: true,
+          limit : 3,
+          previous : res.previous,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1177,9 +1182,9 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          previous: res.previous,
-          sortAscending: true,
+          limit : 3,
+          previous : res.previous,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1194,8 +1199,8 @@ describe('find', () => {
         const collection = t.db.collection('test_paging_string_ids');
         // First page of 3
         let res = await paging.find(collection, {
-          limit: 3,
-          sortAscending: true,
+          limit : 3,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1207,9 +1212,9 @@ describe('find', () => {
 
         // Go forward 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
-          sortAscending: true,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1221,9 +1226,9 @@ describe('find', () => {
 
         // Go forward another 3
         res = await paging.find(collection, {
-          limit: 3,
-          after: res.results[res.results.length - 1]._id,
-          sortAscending: true,
+          limit : 3,
+          after : res.results[res.results.length - 1]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(2);
@@ -1234,9 +1239,9 @@ describe('find', () => {
 
         // // Now back up 3
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
-          sortAscending: true,
+          limit : 3,
+          before : res.results[0]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1248,9 +1253,9 @@ describe('find', () => {
 
         // Now back up 3 more
         res = await paging.find(collection, {
-          limit: 3,
-          before: res.results[0]._id,
-          sortAscending: true,
+          limit : 3,
+          before : res.results[0]._id,
+          sortAscending : true
         });
 
         expect(res.results.length).toEqual(3);
@@ -1268,8 +1273,8 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1280,9 +1285,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(2);
@@ -1293,9 +1298,9 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(2);
@@ -1306,9 +1311,9 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        previous: res.previous,
+        limit : 2,
+        paginatedField : 'timestamp',
+        previous : res.previous
       });
 
       expect(res.results.length).toEqual(2);
@@ -1322,8 +1327,8 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1334,9 +1339,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1347,9 +1352,9 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1360,9 +1365,9 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        before: res.results[0]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        before : res.results[0]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1375,11 +1380,11 @@ describe('find', () => {
     it('does not include the paginatedField in the results if not desired', async () => {
       const collection = t.db.collection('test_paging_custom_fields');
       const res = await paging.find(collection, {
-        limit: 1,
-        fields: {
-          counter: 1,
+        limit : 1,
+        fields : {
+          counter : 1
         },
-        paginatedField: 'timestamp',
+        paginatedField : 'timestamp'
       });
       expect(res.results[0].timestamp).toBe(undefined);
       expect(res.hasNext).toBe(true);
@@ -1389,9 +1394,9 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        query: { $or: [{ counter: { $gt: 3 } }] },
-        limit: 2,
-        paginatedField: 'timestamp',
+        query : { $or : [{ counter : { $gt : 3 } }] },
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1402,10 +1407,10 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        query: { $or: [{ counter: { $gt: 3 } }] },
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
+        query : { $or : [{ counter : { $gt : 3 } }] },
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(1);
@@ -1418,9 +1423,9 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        query: { $or: [{ counter: { $gt: 3 } }] },
-        limit: 2,
-        paginatedField: 'timestamp',
+        query : { $or : [{ counter : { $gt : 3 } }] },
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1431,10 +1436,10 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        query: { $or: [{ counter: { $gt: 3 } }] },
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
+        query : { $or : [{ counter : { $gt : 3 } }] },
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(1);
@@ -1449,8 +1454,8 @@ describe('find', () => {
       const collection = t.db.collection('test_duplicate_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1461,9 +1466,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(2);
@@ -1474,9 +1479,9 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(2);
@@ -1487,9 +1492,9 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        previous: res.previous,
+        limit : 2,
+        paginatedField : 'timestamp',
+        previous : res.previous
       });
 
       expect(res.results.length).toEqual(2);
@@ -1503,8 +1508,8 @@ describe('find', () => {
       const collection = t.db.collection('test_duplicate_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
+        limit : 2,
+        paginatedField : 'timestamp'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1515,9 +1520,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1528,9 +1533,9 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1541,9 +1546,9 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        before: res.results[0]._id,
+        limit : 2,
+        paginatedField : 'timestamp',
+        before : res.results[0]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1556,15 +1561,15 @@ describe('find', () => {
     it('does not include fields not desired', async () => {
       const collection = t.db.collection('test_duplicate_custom_fields');
       const res = await paging.find(collection, {
-        limit: 1,
-        fields: {
-          counter: 1,
+        limit : 1,
+        fields : {
+          counter : 1
         },
-        paginatedField: 'timestamp',
+        paginatedField : 'timestamp'
       });
 
       expect(res.results[0]).toEqual({
-        counter: 6,
+        counter : 6
       });
       expect(res.hasNext).toBe(true);
     });
@@ -1573,9 +1578,9 @@ describe('find', () => {
       const collection = t.db.collection('test_duplicate_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1586,10 +1591,10 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1600,10 +1605,10 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        next: res.next,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        next : res.next,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1614,10 +1619,10 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        previous: res.previous,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        previous : res.previous,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1631,9 +1636,9 @@ describe('find', () => {
       const collection = t.db.collection('test_duplicate_custom_fields');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1644,10 +1649,10 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1658,10 +1663,10 @@ describe('find', () => {
 
       // Go forward another 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        after: res.results[res.results.length - 1]._id,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        after : res.results[res.results.length - 1]._id,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1672,10 +1677,10 @@ describe('find', () => {
 
       // Now back up 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'timestamp',
-        before: res.results[0]._id,
-        sortAscending: true,
+        limit : 2,
+        paginatedField : 'timestamp',
+        before : res.results[0]._id,
+        sortAscending : true
       });
 
       expect(res.results.length).toEqual(2);
@@ -1691,8 +1696,8 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_date');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'date',
+        limit : 2,
+        paginatedField : 'date'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1703,9 +1708,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'date',
-        next: res.next,
+        limit : 2,
+        paginatedField : 'date',
+        next : res.next
       });
 
       expect(res.results.length).toEqual(2);
@@ -1719,8 +1724,8 @@ describe('find', () => {
       const collection = t.db.collection('test_paging_date');
       // First page of 2
       let res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'date',
+        limit : 2,
+        paginatedField : 'date'
       });
 
       expect(res.results.length).toEqual(2);
@@ -1731,9 +1736,9 @@ describe('find', () => {
 
       // Go forward 2
       res = await paging.find(collection, {
-        limit: 2,
-        paginatedField: 'date',
-        after: res.results[res.results.length - 1]._id,
+        limit : 2,
+        paginatedField : 'date',
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.length).toEqual(2);
@@ -1753,7 +1758,7 @@ describe('find', () => {
       // First page.
       let res = await paging.find(collection, {
         limit,
-        paginatedField,
+        paginatedField
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1767,7 +1772,7 @@ describe('find', () => {
       res = await paging.find(collection, {
         limit,
         paginatedField,
-        next: res.next,
+        next : res.next
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1781,7 +1786,7 @@ describe('find', () => {
       res = await paging.find(collection, {
         limit,
         paginatedField,
-        previous: res.previous,
+        previous : res.previous
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1800,7 +1805,7 @@ describe('find', () => {
       // First page.
       let res = await paging.find(collection, {
         limit,
-        paginatedField,
+        paginatedField
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1814,7 +1819,7 @@ describe('find', () => {
       res = await paging.find(collection, {
         limit,
         paginatedField,
-        after: res.results[res.results.length - 1]._id,
+        after : res.results[res.results.length - 1]._id
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1828,7 +1833,7 @@ describe('find', () => {
       res = await paging.find(collection, {
         limit,
         paginatedField,
-        before: res.results[0]._id,
+        before : res.results[0]._id
       });
 
       expect(res.results.start).toEqual(undefined); // Verify it is not returned since it is not requested.
@@ -1845,9 +1850,9 @@ describe('find', () => {
       const collection = t.db.collection('test_sorting');
 
       const res = await paging.find(collection, {
-        paginatedField: 'name',
-        sortAscending: true,
-        limit: 10,
+        paginatedField : 'name',
+        sortAscending : true,
+        limit : 10
       });
 
       expect(_.pluck(res.results, 'name')).toEqual([
@@ -1856,56 +1861,56 @@ describe('find', () => {
         'Gamma',
         'aleph',
         'bet',
-        'gimel',
+        'gimel'
       ]);
 
-      const res_localized = await paging.find(collection, {
-        paginatedField: 'name',
-        sortAscending: true,
-        limit: 10,
-        collation: { locale: 'en' },
+      const resLocalized = await paging.find(collection, {
+        paginatedField : 'name',
+        sortAscending : true,
+        limit : 10,
+        collation : { locale : 'en' }
       });
 
-      expect(_.pluck(res_localized.results, 'name')).toEqual([
+      expect(_.pluck(resLocalized.results, 'name')).toEqual([
         'aleph',
         'Alpha',
         'bet',
         'Beta',
         'Gamma',
-        'gimel',
+        'gimel'
       ]);
 
-      paging.config.COLLATION = { locale: 'en' };
+      paging.config.COLLATION = { locale : 'en' };
 
-      const res_static_localized = await paging.find(collection, {
-        paginatedField: 'name',
-        sortAscending: true,
-        limit: 10,
+      const resStaticLocalized = await paging.find(collection, {
+        paginatedField : 'name',
+        sortAscending : true,
+        limit : 10
       });
 
-      expect(_.pluck(res_static_localized.results, 'name')).toEqual([
+      expect(_.pluck(resStaticLocalized.results, 'name')).toEqual([
         'aleph',
         'Alpha',
         'bet',
         'Beta',
         'Gamma',
-        'gimel',
+        'gimel'
       ]);
 
-      const res_excluding_collation = await paging.find(collection, {
-        paginatedField: 'name',
-        sortAscending: true,
-        limit: 10,
-        collation: null,
+      const resExcludingCollation = await paging.find(collection, {
+        paginatedField : 'name',
+        sortAscending : true,
+        limit : 10,
+        collation : null
       });
 
-      expect(_.pluck(res_excluding_collation.results, 'name')).toEqual([
+      expect(_.pluck(resExcludingCollation.results, 'name')).toEqual([
         'Alpha',
         'Beta',
         'Gamma',
         'aleph',
         'bet',
-        'gimel',
+        'gimel'
       ]);
     });
   });
@@ -1918,7 +1923,7 @@ describe('find', () => {
     it('clamps to the lower limit', async () => {
       const collection = t.db.collection('test_paging_limits');
       const res = await paging.find(collection, {
-        limit: -1,
+        limit : -1
       });
 
       expect(res.results.length).toEqual(1);
@@ -1934,12 +1939,13 @@ describe('find', () => {
     it('allows overriding the limit', async () => {
       const collection = t.db.collection('test_paging_limits');
       const res = await paging.find(collection, {
-        limit: 4,
+        limit : 4
       });
 
       expect(res.results.length).toEqual(4);
     });
   });
+
   describe('when max limits are hit', () => {
     const originalMaxLimit = paging.config.MAX_LIMIT;
     beforeAll(() => (paging.config.MAX_LIMIT = 2));
@@ -1948,7 +1954,7 @@ describe('find', () => {
     it('clamps to the max limit', async () => {
       const collection = t.db.collection('test_paging_limits');
       const res = await paging.find(collection, {
-        limit: 999,
+        limit : 999
       });
 
       expect(res.results.length).toEqual(2);
@@ -1963,13 +1969,13 @@ describe('find', () => {
 
     describe('without the `sortCaseInsensitive` parameter', () => {
       const options = {
-        paginatedField: 'name',
-        sortAscending: true,
-        limit: 2,
+        paginatedField : 'name',
+        sortAscending : true,
+        limit : 2
       };
 
       it('sorts capital letters first', async () => {
-        const { results: results } = await paging.find(collection, options);
+        const { results } = await paging.find(collection, options);
         expect(_.pluck(results, 'name')).toEqual(['Alpha', 'Beta']);
       });
 
@@ -1984,7 +1990,7 @@ describe('find', () => {
 
         const pg2 = await paging.aggregate(collection, {
           ...options,
-          next: pg1.next,
+          next : pg1.next
         });
         expect(pg2.hasNext).toBe(true);
         expect(pg2.hasPrevious).toBe(true);
@@ -1993,7 +1999,7 @@ describe('find', () => {
 
         const pg3 = await paging.aggregate(collection, {
           ...options,
-          next: pg2.next,
+          next : pg2.next
         });
         expect(pg3.hasNext).toBe(true);
         expect(pg3.hasPrevious).toBe(true);
@@ -2002,7 +2008,7 @@ describe('find', () => {
 
         const pg4 = await paging.aggregate(collection, {
           ...options,
-          next: pg3.next,
+          next : pg3.next
         });
         expect(pg4.hasNext).toBe(true);
         expect(pg4.hasPrevious).toBe(true);
@@ -2011,7 +2017,7 @@ describe('find', () => {
 
         const pg3b = await paging.aggregate(collection, {
           ...options,
-          previous: pg4.previous,
+          previous : pg4.previous
         });
         expect(pg3b.hasNext).toBe(true);
         expect(pg3b.next).toEqual(pg3.next);
@@ -2021,7 +2027,7 @@ describe('find', () => {
 
         const pg2b = await paging.aggregate(collection, {
           ...options,
-          previous: pg3.previous,
+          previous : pg3.previous
         });
         expect(pg2b.hasNext).toBe(true);
         expect(pg2b.next).toEqual(pg2.next);
@@ -2031,7 +2037,7 @@ describe('find', () => {
 
         const pg1b = await paging.aggregate(collection, {
           ...options,
-          previous: pg2.previous,
+          previous : pg2.previous
         });
         expect(pg1b.hasNext).toBe(true);
         expect(pg1b.next).toEqual(pg1.next);
@@ -2043,10 +2049,10 @@ describe('find', () => {
 
     describe('with the `sortCaseInsensitive` parameter...', () => {
       const options = {
-        paginatedField: 'name',
-        sortCaseInsensitive: true,
-        sortAscending: true,
-        limit: 2,
+        paginatedField : 'name',
+        sortCaseInsensitive : true,
+        sortAscending : true,
+        limit : 2
       };
 
       it('sorts case-insensitively', async () => {
@@ -2064,10 +2070,16 @@ describe('find', () => {
 
       it('pages correctly forward and backward', async () => {
         const { next } = await paging.find(collection, { ...options });
-        const pg2 = await paging.find(collection, { ...options, next });
+        const pg2 = await paging.find(collection, {
+          ...options,
+          next
+        });
         expect(_.pluck(pg2.results, 'name')).toEqual(['bet', 'Beta']);
         expect(pg2.hasPrevious).toBe(true);
-        const pg1 = await paging.find(collection, { ...options, previous: pg2.previous });
+        const pg1 = await paging.find(collection, {
+          ...options,
+          previous : pg2.previous
+        });
         expect(_.pluck(pg1.results, 'name')).toEqual(['aleph', 'Alpha']);
         expect(pg1.hasNext).toBe(true);
         expect(pg1.hasPrevious).toBe(false);

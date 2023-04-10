@@ -2,7 +2,11 @@ const _ = require('underscore');
 
 const aggregate = require('./aggregate');
 const config = require('./config');
-const { prepareResponse, generateSort, generateCursorQuery } = require('./utils/query');
+const {
+  prepareResponse,
+  generateSort,
+  generateCursorQuery
+} = require('./utils/query');
 const sanitizeParams = require('./utils/sanitizeParams');
 
 /**
@@ -21,7 +25,7 @@ const sanitizeParams = require('./utils/sanitizeParams');
  *          exist, the results will be secondarily ordered by the _id.
  *        2. Indexed. For large collections, this should be indexed for query performance.
  *        3. Immutable. If the value changes between paged queries, it could appear twice.
-		  4. Consistent. All values (except undefined and null values) must be of the same type.
+ *        4. Consistent. All values (except undefined and null values) must be of the same type.
  *      The default is to use the Mongo built-in '_id' field, which satisfies the above criteria.
  *      The only reason to NOT use the Mongo _id field is if you chose to implement your own ids.
  *    -sortAscending {boolean} Whether to sort in ascending order by the `paginatedField`.
@@ -34,7 +38,7 @@ const sanitizeParams = require('./utils/sanitizeParams');
  *    -hint {String} An optional index hint to provide to the mongo query
  *    -collation {Object} An optional collation to provide to the mongo query. E.g. { locale: 'en', strength: 2 }. When null, disables the global collation.
  */
-module.exports = async function(collection, params) {
+module.exports = async function (collection, params) {
   const removePaginatedFieldInResponse =
     params.fields && !params.fields[params.paginatedField || '_id'];
 
@@ -44,20 +48,20 @@ module.exports = async function(collection, params) {
     response = aggregate(
       collection,
       Object.assign({}, params, {
-        aggregation: params.query ? [{ $match: params.query }] : [],
+        aggregation : params.query ? [{ $match : params.query }] : []
       })
     );
   } else {
     // Need to repeat `params.paginatedField` default value ('_id') since it's set in 'sanitizeParams()'
-    params = _.defaults(await sanitizeParams(collection, params), { query: {} });
+    params = _.defaults(await sanitizeParams(collection, params), { query : {} });
 
     const cursorQuery = generateCursorQuery(params);
     const $sort = generateSort(params);
 
     const query = collection.find(
-      { $and: [cursorQuery, params.query] },
+      { $and : [cursorQuery, params.query] },
       {
-        projection: params.fields,
+        projection : params.fields
       }
     );
 

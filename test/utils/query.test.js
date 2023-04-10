@@ -4,11 +4,11 @@ const { encodePaginationTokens } = require('../../src/utils/query');
 describe('encodePaginationTokens', () => {
   it('encodes the pagination tokens on the passed-in response object', () => {
     const params = {
-      paginatedField: '_id',
+      paginatedField : '_id'
     };
     const response = {
-      next: { _id: '789' },
-      previous: { _id: '456' },
+      next : { _id : '789' },
+      previous : { _id : '456' }
     };
 
     encodePaginationTokens(params, response);
@@ -17,13 +17,19 @@ describe('encodePaginationTokens', () => {
     expect(response.previous).toEqual(bsonUrlEncoding.encode('456'));
   });
 
-  it("constructs pagination tokens using both the _id and the paginatedField if the latter isn't the former", () => {
+  it('constructs pagination tokens using both the _id and the paginatedField if the latter isn\'t the former', () => {
     const params = {
-      paginatedField: 'name',
+      paginatedField : 'name'
     };
     const response = {
-      next: { _id: '789', name: 'Test 2' },
-      previous: { _id: '456', name: 'Test' },
+      next : {
+        _id : '789',
+        name : 'Test 2'
+      },
+      previous : {
+        _id : '456',
+        name : 'Test'
+      }
     };
 
     encodePaginationTokens(params, response);
