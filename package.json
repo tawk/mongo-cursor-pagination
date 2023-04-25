@@ -38,6 +38,7 @@
   "dependencies": {
     "base64-url": "^2.2.0",
     "bson": "^5.2.0",
+    "mongoose": "^7.0.5",
     "object-path": "^0.11.5",
     "projection-utils": "^1.1.0",
     "semver": "^5.4.1",
