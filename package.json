@@ -37,7 +37,7 @@
   "homepage": "https://github.com/tawk/mongo-cursor-pagination#readme",
   "dependencies": {
     "base64-url": "^2.2.0",
-    "bson": "^5.2.0",
+    "bson": "6.7",
     "mongoose": "^7.0.5",
     "object-path": "^0.11.5",
     "projection-utils": "^1.1.0",
@@ -56,7 +56,7 @@
     "eslint-plugin-newline-destructuring": "^1.1.1",
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^26.0.1",
-    "mongodb": "^5.2.0",
+    "mongodb": "^6.7.0",
     "mongodb-memory-server": "8.12.2",
     "prettier": "^1.19.1"
   },
